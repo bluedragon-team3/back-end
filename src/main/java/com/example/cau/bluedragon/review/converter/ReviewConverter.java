@@ -10,6 +10,8 @@ public class ReviewConverter {
     return ReviewResponseDto.builder()
         .id(review.getId())
         .user(UserConverter.userToUserResponsesDto(review.getUser()))
+        .content(review.getContent())
+        .createdDate(review.getCreatedAt())
         .build();
   }
 
