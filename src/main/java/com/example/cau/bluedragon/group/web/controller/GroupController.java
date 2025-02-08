@@ -7,6 +7,7 @@ import com.example.cau.bluedragon.group.service.GroupQueryServiceImpl;
 import com.example.cau.bluedragon.group.web.dto.GroupDetailResponseDto;
 import com.example.cau.bluedragon.group.web.dto.GroupRequestDto;
 import com.example.cau.bluedragon.group.web.dto.GroupResponseDto;
+import com.example.cau.bluedragon.user.web.dto.UserResponsesDto;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -57,6 +58,12 @@ public class GroupController {
     public ResponseEntity<Boolean> endGroup(@PathVariable("groupId") Long groupId, @RequestParam("userId") Long userId) {
         groupCommandService.endGroup(groupId, userId);
         return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
+    @GetMapping("/{groupId}/joinMember/")
+    public ResponseEntity<List<UserResponsesDto>> getGroupUsers(@PathVariable("groupId") Long groupId, @RequestParam("userId") Long userId) {
+        List<UserResponsesDto> userResponsesDtos = groupQueryService.getGroupUsers(groupId, userId);
+        return new ResponseEntity<>(userResponsesDtos, HttpStatus.OK);
     }
 
 }
