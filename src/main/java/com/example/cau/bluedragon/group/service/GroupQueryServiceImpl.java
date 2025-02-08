@@ -29,7 +29,7 @@ public class GroupQueryServiceImpl implements GroupQueryService {
             .orElseThrow(() -> new RuntimeException("해당 ID를 가진 그룹이 없습니다."));
 
         User user = userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("해당 아이디를 가진 회원이 존재하지 않습니다."));
+            .orElseThrow(() -> new RuntimeException("해당 ID를 가진 회원이 존재하지 않습니다."));
 
         Boolean isOwner = user.equals(group.getOwner());
 

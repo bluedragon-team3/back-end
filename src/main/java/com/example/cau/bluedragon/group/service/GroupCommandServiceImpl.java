@@ -25,7 +25,7 @@ public class GroupCommandServiceImpl implements GroupCommandService {
     public Group createGroup(GroupRequestDto requestDto, Long userId) {
         // 유저 찾기
         User user = userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("해당 아이디를 가진 회원이 존재하지 않습니다."));
+            .orElseThrow(() -> new RuntimeException("해당 ID를 가진 회원이 존재하지 않습니다."));
 
         // 그룹 생성
         Group group = new Group().builder()
@@ -49,6 +49,31 @@ public class GroupCommandServiceImpl implements GroupCommandService {
             .user(user)
             .build();
         groupUserRepository.save(groupUser);
+
+        return group;
+    }
+
+    @Override
+    @Transactional
+    public Group endGroup(Long groupId, Long userId) {
+        Group group = groupRepository.findById(groupId)
+            .orElseThrow(() -> new RuntimeException("해당 ID를 가진 회원이 존재하지 않습니다."));
+
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("해당 ID를 가진 회원이 존재하지 않습니다."));
+
+        // 내가 소모임장이 아닌 경우
+        if (!user.equals(group.getOwner())) {
+            throw new RuntimeException("소모임장만 모임을 종료시킬 수 있습니다.");
+        }
+
+        // 이미 종료된 소모임인 경우
+        if (group.getIsEnded()) {
+            throw new RuntimeException("이미 종료된 소모임입니다.");
+        }
+
+        // 내가 소모임장이고, 아직 종료되지 않은 소모임인 경우
+        group.endGroup(); // 소모임 종료
 
         return group;
     }

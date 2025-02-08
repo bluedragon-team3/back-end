@@ -72,4 +72,9 @@ public class Group {
 
   @OneToMany(mappedBy = "group")
   List<Review> review;
+
+  public void endGroup() {
+    this.isEnded = true;
+  }
+
 }
