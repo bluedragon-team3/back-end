@@ -59,11 +59,6 @@ public class GroupQueryServiceImpl implements GroupQueryService {
     }
 
     @Override
-    public List<GroupResponseDto> SearchGroups(Category category) {
-        return List.of();
-    }
-
-    @Override
     public List<UserResponsesDto> getGroupUsers(Long groupId, Long userId) {
         Group group = groupRepository.findById(groupId)
             .orElseThrow(() -> new RuntimeException("해당 ID를 가진 그룹이 없습니다."));

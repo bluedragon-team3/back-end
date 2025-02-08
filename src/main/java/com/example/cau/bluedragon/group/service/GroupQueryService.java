@@ -11,8 +11,6 @@ import java.util.List;
 public interface GroupQueryService {
   GroupDetailResponseDto getGroupDetail(Long groupId, Long userId);
 
-  List<GroupResponseDto> SearchGroups(Category category);
-
   List<UserResponsesDto> getGroupUsers(Long groupId, Long userId);
 
   List<GroupResponseDto> getAllGroups();
