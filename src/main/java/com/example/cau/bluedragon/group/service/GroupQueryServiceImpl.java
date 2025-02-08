@@ -4,6 +4,8 @@ import static com.example.cau.bluedragon.group.converter.GroupConverter.groupToR
 import static com.example.cau.bluedragon.group.converter.GroupUserConverter.groupUserListToUserList;
 import static com.example.cau.bluedragon.user.converter.UserConverter.userToUserResponsesDto;
 
+import com.example.cau.bluedragon.apiPayloadd.code.status.ErrorStatus;
+import com.example.cau.bluedragon.exception.handler.GeneralExceptionHandler;
 import com.example.cau.bluedragon.group.domain.Group;
 import com.example.cau.bluedragon.group.domain.GroupUser;
 import com.example.cau.bluedragon.group.domain.enums.Category;
@@ -33,10 +35,10 @@ public class GroupQueryServiceImpl implements GroupQueryService {
     @Override
     public GroupDetailResponseDto getGroupDetail(Long groupId, Long userId) {
         Group group = groupRepository.findById(groupId)
-            .orElseThrow(() -> new RuntimeException("해당 ID를 가진 그룹이 없습니다."));
+            .orElseThrow(() -> new GeneralExceptionHandler(ErrorStatus.GROUP_NOT_FOUND));
 
         User user = userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("해당 ID를 가진 회원이 존재하지 않습니다."));
+            .orElseThrow(() -> new GeneralExceptionHandler(ErrorStatus.USER_NOT_FOUND));
 
         Boolean isOwner = user.equals(group.getOwner());
 
@@ -61,7 +63,7 @@ public class GroupQueryServiceImpl implements GroupQueryService {
     @Override
     public List<UserResponsesDto> getGroupUsers(Long groupId, Long userId) {
         Group group = groupRepository.findById(groupId)
-            .orElseThrow(() -> new RuntimeException("해당 ID를 가진 그룹이 없습니다."));
+            .orElseThrow(() -> new GeneralExceptionHandler(ErrorStatus.GROUP_NOT_FOUND));
 
         List<GroupUser> groupUsers = groupUserRepository.findAllByGroupId(groupId);
         List<User> users = groupUserListToUserList(groupUsers);

@@ -16,8 +16,18 @@ public enum ErrorStatus implements BaseErrorCode {
   _FORBIDDEN(HttpStatus.FORBIDDEN, 403, "금지된 요청입니다."),
 
   // User Error
-  USER_NOT_FOUND(HttpStatus.BAD_REQUEST, 4001, "사용자가 없습니다."),
-  EMAIL_NOT_VAILD(HttpStatus.BAD_REQUEST, 4001, "중앙대학교 이메일이 아닙니다.")
+  USER_NOT_FOUND(HttpStatus.NOT_FOUND, 4001, "해당 ID를 가진 회원이 존재하지 않습니다."),
+  EMAIL_NOT_VAILD(HttpStatus.BAD_REQUEST, 4002, "중앙대학교 이메일이 아닙니다."),
+  USER_NOT_OWNER(HttpStatus.BAD_REQUEST, 4003, "소모임장이 아닙니다."),
+
+  // Group Error
+  GROUP_NOT_FOUND(HttpStatus.NOT_FOUND, 5001, "해당 소모임이 없습니다."),
+  GROUP_ALREADY_ENDED(HttpStatus.BAD_REQUEST, 5002, "이미 종료된 소모임입니다."),
+
+
+  // GroupUser Error
+  GROUP_USER_ALREADY_PRESENT(HttpStatus.BAD_REQUEST, 6001, "이미 종료된 소모임입니다."),
+  GROUP_USER_FULL(HttpStatus.BAD_REQUEST, 6002, "인원이 다 찼습니다.")
 
   ;
   private final HttpStatus httpStatus;
