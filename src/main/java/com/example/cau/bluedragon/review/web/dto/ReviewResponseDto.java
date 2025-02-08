@@ -17,6 +17,6 @@ public class ReviewResponseDto {
   UserResponsesDto user;
   String content;
 
-  @JsonFormat(pattern = "yyyy-MM-ddTHH:mm")
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
   LocalDateTime createdDate;
 }
