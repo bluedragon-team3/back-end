@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class UserRegisterRequestDto {
+  String signId;
   String email;
   String password;
   String name;

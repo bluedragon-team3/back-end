@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class HomepageController {
 
-  GroupRepository groupRepository;
+  private final GroupRepository groupRepository;
 
   @GetMapping("/")
   public ResponseEntity<List<GroupResponseDto>> home() {

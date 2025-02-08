@@ -9,6 +9,7 @@ public class UserConverter {
   public static UserResponsesDto userToUserResponsesDto(User user) {
     return UserResponsesDto.builder()
         .id(user.getId())
+        .signId(user.getSignId())
         .email(user.getEmail())
         .name(user.getName())
         .studentNumber(user.getStudentNumber())
