@@ -19,7 +19,7 @@ public class ReviewQueryServiceImpl implements ReviewQueryService{
 
   @Override
   public List<Group> getEndedGroups() {
-    List<Group> groups = groupRepository.findAllByIdEnded(true);
+    List<Group> groups = groupRepository.findAllByIsEnded(true);
     return groups;
   }
 

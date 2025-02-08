@@ -1,5 +1,7 @@
 package com.example.cau.bluedragon.user.service;
 
+import com.example.cau.bluedragon.apiPayloadd.code.status.ErrorStatus;
+import com.example.cau.bluedragon.exception.handler.GeneralExceptionHandler;
 import com.example.cau.bluedragon.user.domain.User;
 import com.example.cau.bluedragon.user.domain.enums.Sex;
 import com.example.cau.bluedragon.user.repository.UserRepository;
@@ -22,6 +24,9 @@ public class UserCommandServiceImpl implements UserCommandService {
 
   @Override
   public User registerUser(final UserRegisterRequestDto requestDto) {
+    if(!requestDto.getEmail().contains("@cau.ac.kr"))
+      throw new GeneralExceptionHandler(ErrorStatus.EMAIL_NOT_VAILD);
+
     User user = User.builder()
         .signId(requestDto.getSignId())
         .email(requestDto.getEmail())

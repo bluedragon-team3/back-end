@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Long> {
 
-  List<Group> findAllByIdEnded(Boolean idEnded);
+  List<Group> findAllByIsEnded(Boolean idEnded);
 }

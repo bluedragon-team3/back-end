@@ -11,10 +11,11 @@ import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class GroupCommandServiceImpl implements GroupCommandService {
 
     private final UserRepository userRepository;
