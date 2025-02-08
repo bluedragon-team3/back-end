@@ -16,13 +16,14 @@ public class UserCommandServiceImpl implements UserCommandService {
 
   @Override
   public User loginUser(final UserLoginRequestDto requestDto) {
-    User user = userRepository.findByEmailAndPassword(requestDto.getEmail(), requestDto.getPassword()).orElseThrow();
+    User user = userRepository.findBySignIdAndPassword(requestDto.getSignId(), requestDto.getPassword()).orElseThrow();
     return user;
   }
 
   @Override
   public User registerUser(final UserRegisterRequestDto requestDto) {
     User user = User.builder()
+        .signId(requestDto.getSignId())
         .email(requestDto.getEmail())
         .password(requestDto.getPassword())
         .name(requestDto.getName())

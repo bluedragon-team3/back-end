@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GroupUserRepository extends JpaRepository<GroupUser, Long> {
-  public List<GroupUser> findByUserId(Long userId);
 
+  List<GroupUser> findAllByUserId(Long userId);
+
+  List<GroupUser> findAllByGroupId(Long groupId);
 }
