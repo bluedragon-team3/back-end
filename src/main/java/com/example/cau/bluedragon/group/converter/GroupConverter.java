@@ -19,6 +19,7 @@ public class GroupConverter {
         .finishDate(group.getFinishDate())
         .peopleLimit(group.getPeopleLimit())
         .createdDate(group.getCreatedDate())
+        .isEnded(group.getIsEnded())
         .build();
   }
 
