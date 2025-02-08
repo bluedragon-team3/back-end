@@ -47,6 +47,12 @@ public class GroupController {
         return new ResponseEntity<>(groupResponseDto, HttpStatus.OK);
     }
 
+    @PostMapping("/{groupId}/")
+    public ResponseEntity<Boolean> joinGroup(@PathVariable("groupId") Long groupId, @RequestParam("userId") Long userId) {
+        groupCommandService.joinGroup(groupId, userId);
+        return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
     @PostMapping("/{groupId}/owner/")
     public ResponseEntity<Boolean> endGroup(@PathVariable("groupId") Long groupId, @RequestParam("userId") Long userId) {
         groupCommandService.endGroup(groupId, userId);

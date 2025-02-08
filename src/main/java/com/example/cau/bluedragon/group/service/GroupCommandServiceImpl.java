@@ -9,6 +9,7 @@ import com.example.cau.bluedragon.user.domain.User;
 import com.example.cau.bluedragon.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -79,6 +80,31 @@ public class GroupCommandServiceImpl implements GroupCommandService {
     @Override
     @Transactional
     public void joinGroup(Long groupId, Long userId) {
+        Group group = groupRepository.findById(groupId)
+            .orElseThrow(() -> new RuntimeException("해당 ID를 가진 회원이 존재하지 않습니다."));
 
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("해당 ID를 가진 회원이 존재하지 않습니다."));
+
+        Optional<GroupUser> groupUser = groupUserRepository.findByGroupAndUser(group, user);
+
+        // 이미 신청했던 소모임의 경우
+        if (groupUser.isPresent()) {
+            throw new RuntimeException("이미 참여중입니다.");
+        }
+
+        // 이미 소모임 인원이 다 찬 경우
+        Long numberOfPeople = groupUserRepository.countByGroup(group);
+        if (numberOfPeople == group.getPeopleLimit()) {
+            throw new RuntimeException("인원이 다 찼습니다.");
+        }
+
+        // 소모임 참여하기
+        GroupUser newGroupUser = new GroupUser().builder()
+            .group(group)
+            .user(user)
+            .isDeleted(false)
+            .build();
+        groupUserRepository.save(newGroupUser);
     }
 }
