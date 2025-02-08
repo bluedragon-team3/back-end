@@ -29,7 +29,7 @@ public class Review {
   private Boolean isDeleted;
 
   @CreatedDate
-  private LocalDateTime createdAt;
+  private LocalDateTime createdDate;
 
   @ManyToOne
   private Group group;
