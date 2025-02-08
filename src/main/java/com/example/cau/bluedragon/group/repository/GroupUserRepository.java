@@ -18,7 +18,7 @@ public interface GroupUserRepository extends JpaRepository<GroupUser, Long> {
     @Query("SELECT COUNT(g) FROM GroupUser g WHERE g.group = :group")
     Long countByGroup(@Param("group") Group group);
 
-  List<GroupUser> findAllByUserId(Long userId);
+    List<GroupUser> findAllByUserId(Long userId);
 
-  List<GroupUser> findAllByGroupId(Long groupId);
+    List<GroupUser> findAllByGroupId(Long groupId);
 }
