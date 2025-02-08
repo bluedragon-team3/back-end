@@ -1,9 +1,10 @@
 package com.example.cau.bluedragon;
 
 import com.example.cau.bluedragon.group.converter.GroupConverter;
+import com.example.cau.bluedragon.group.domain.Group;
 import com.example.cau.bluedragon.group.repository.GroupRepository;
-import com.example.cau.bluedragon.group.web.dto.GroupRequestDto;
 import com.example.cau.bluedragon.group.web.dto.GroupResponseDto;
+import java.util.Collections;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,8 @@ public class HomepageController {
   }
 
   private List<GroupResponseDto> getRandomGroups() {
-    return GroupConverter.groupListToResponseDtoList(groupRepository.findAll());
+    List<Group> groups = groupRepository.findAll();
+    Collections.shuffle(groups);
+    return GroupConverter.groupListToResponseDtoList(groups);
   }
 }
