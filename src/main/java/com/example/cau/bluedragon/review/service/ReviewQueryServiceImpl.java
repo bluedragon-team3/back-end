@@ -50,7 +50,7 @@ public class ReviewQueryServiceImpl implements ReviewQueryService{
     Review review = new Review().builder()
         .content(requestDto.getContent())
         .isDeleted(false)
-        .createdAt(LocalDateTime.now())
+        .createdDate(LocalDateTime.now())
         .group(group)
         .user(user)
         .build();

@@ -11,7 +11,7 @@ public class ReviewConverter {
         .id(review.getId())
         .user(UserConverter.userToUserResponsesDto(review.getUser()))
         .content(review.getContent())
-        .createdDate(review.getCreatedAt())
+        .createdDate(review.getCreatedDate())
         .build();
   }
 
