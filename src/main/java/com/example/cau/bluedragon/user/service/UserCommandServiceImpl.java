@@ -18,7 +18,8 @@ public class UserCommandServiceImpl implements UserCommandService {
 
   @Override
   public User loginUser(final UserLoginRequestDto requestDto) {
-    User user = userRepository.findBySignIdAndPassword(requestDto.getSignId(), requestDto.getPassword()).orElseThrow();
+    User user = userRepository.findBySignIdAndPassword(requestDto.getSignId(), requestDto.getPassword())
+        .orElseThrow(() -> new GeneralExceptionHandler(ErrorStatus.USER_NOT_FOUND));
     return user;
   }
 

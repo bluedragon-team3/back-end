@@ -1,5 +1,7 @@
 package com.example.cau.bluedragon.group.service;
 
+import com.example.cau.bluedragon.apiPayloadd.code.status.ErrorStatus;
+import com.example.cau.bluedragon.exception.handler.GeneralExceptionHandler;
 import com.example.cau.bluedragon.group.domain.Group;
 import com.example.cau.bluedragon.group.domain.GroupUser;
 import com.example.cau.bluedragon.group.repository.GroupRepository;
@@ -27,7 +29,7 @@ public class GroupCommandServiceImpl implements GroupCommandService {
     public Group createGroup(GroupRequestDto requestDto, Long userId) {
         // 유저 찾기
         User user = userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("해당 ID를 가진 회원이 존재하지 않습니다."));
+            .orElseThrow(() -> new GeneralExceptionHandler(ErrorStatus.USER_NOT_FOUND));
 
         // 그룹 생성
         Group group = new Group().builder()
@@ -59,19 +61,19 @@ public class GroupCommandServiceImpl implements GroupCommandService {
     @Transactional
     public void endGroup(Long groupId, Long userId) {
         Group group = groupRepository.findById(groupId)
-            .orElseThrow(() -> new RuntimeException("해당 ID를 가진 회원이 존재하지 않습니다."));
+            .orElseThrow(() -> new GeneralExceptionHandler(ErrorStatus.GROUP_NOT_FOUND));
 
         User user = userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("해당 ID를 가진 회원이 존재하지 않습니다."));
+            .orElseThrow(() -> new GeneralExceptionHandler(ErrorStatus.USER_NOT_FOUND));
 
         // 내가 소모임장이 아닌 경우
         if (!user.equals(group.getOwner())) {
-            throw new RuntimeException("소모임장만 모임을 종료시킬 수 있습니다.");
+            throw new GeneralExceptionHandler(ErrorStatus.USER_NOT_OWNER);
         }
 
         // 이미 종료된 소모임인 경우
         if (group.getIsEnded()) {
-            throw new RuntimeException("이미 종료된 소모임입니다.");
+            throw new GeneralExceptionHandler(ErrorStatus.GROUP_ALREADY_ENDED);
         }
 
         // 내가 소모임장이고, 아직 종료되지 않은 소모임인 경우
@@ -82,22 +84,22 @@ public class GroupCommandServiceImpl implements GroupCommandService {
     @Transactional
     public void joinGroup(Long groupId, Long userId) {
         Group group = groupRepository.findById(groupId)
-            .orElseThrow(() -> new RuntimeException("해당 ID를 가진 회원이 존재하지 않습니다."));
+            .orElseThrow(() -> new GeneralExceptionHandler(ErrorStatus.GROUP_NOT_FOUND));
 
         User user = userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("해당 ID를 가진 회원이 존재하지 않습니다."));
+            .orElseThrow(() -> new GeneralExceptionHandler(ErrorStatus.USER_NOT_FOUND));
 
         Optional<GroupUser> groupUser = groupUserRepository.findByGroupAndUser(group, user);
 
         // 이미 신청했던 소모임의 경우
         if (groupUser.isPresent()) {
-            throw new RuntimeException("이미 참여중입니다.");
+            throw new GeneralExceptionHandler(ErrorStatus.GROUP_USER_ALREADY_PRESENT);
         }
 
         // 이미 소모임 인원이 다 찬 경우
         Long numberOfPeople = groupUserRepository.countByGroup(group);
         if (numberOfPeople == group.getPeopleLimit()) {
-            throw new RuntimeException("인원이 다 찼습니다.");
+            throw new GeneralExceptionHandler(ErrorStatus.GROUP_USER_FULL);
         }
 
         // 소모임 참여하기
