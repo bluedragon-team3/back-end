@@ -4,6 +4,7 @@ import com.example.cau.bluedragon.group.converter.GroupConverter;
 import com.example.cau.bluedragon.group.domain.Group;
 import com.example.cau.bluedragon.group.service.GroupCommandServiceImpl;
 import com.example.cau.bluedragon.group.service.GroupQueryServiceImpl;
+import com.example.cau.bluedragon.group.web.dto.GroupDetailResponseDto;
 import com.example.cau.bluedragon.group.web.dto.GroupRequestDto;
 import com.example.cau.bluedragon.group.web.dto.GroupResponseDto;
 import java.util.List;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +39,12 @@ public class GroupController {
     public ResponseEntity<List<GroupResponseDto>> getAllGroups() {
         List<GroupResponseDto> groupResponseDtos = groupQueryService.getAllGroups();
         return new ResponseEntity<>(groupResponseDtos, HttpStatus.OK);
+    }
+
+    @GetMapping("/{groupId}/")
+    public ResponseEntity<GroupDetailResponseDto> getGroupDetail(@PathVariable("groupId") Long groupId, @RequestParam("userId") Long userId) {
+        GroupDetailResponseDto groupResponseDto = groupQueryService.getGroupDetail(groupId, userId);
+        return new ResponseEntity<>(groupResponseDto, HttpStatus.OK);
     }
 
 }
