@@ -1,7 +1,7 @@
 package com.example.cau.bluedragon.review.domain;
 
 import com.example.cau.bluedragon.group.domain.Group;
-import com.example.cau.bluedragon.member.domain.Member;
+import com.example.cau.bluedragon.user.domain.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,5 +35,5 @@ public class Review {
   private Group group;
 
   @ManyToOne
-  private Member member;
+  private User user;
 }

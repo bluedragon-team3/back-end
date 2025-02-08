@@ -2,7 +2,7 @@ package com.example.cau.bluedragon.group.domain;
 
 import com.example.cau.bluedragon.group.domain.enums.Category;
 import com.example.cau.bluedragon.review.domain.Review;
-import com.example.cau.bluedragon.member.domain.Member;
+import com.example.cau.bluedragon.user.domain.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -58,10 +58,10 @@ public class Group {
   private Boolean isDeleted;
 
   @ManyToOne
-  private Member owner;
+  private User owner;
 
   @OneToMany(mappedBy = "group")
-  List<GroupMember> groupMembers;
+  List<GroupUser> groupUsers;
 
   @OneToMany(mappedBy = "group")
   List<JoinRequest> joinRequests;

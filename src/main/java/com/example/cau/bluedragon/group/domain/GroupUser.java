@@ -1,6 +1,6 @@
 package com.example.cau.bluedragon.group.domain;
 
-import com.example.cau.bluedragon.member.domain.Member;
+import com.example.cau.bluedragon.user.domain.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GroupMember {
+public class GroupUser {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -25,7 +25,7 @@ public class GroupMember {
   private Group group;
 
   @ManyToOne
-  private Member member;
+  private User user;
 
   private Boolean isDeleted;
 }

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import lombok.Getter;
 
 @Getter
-public class GroupDetailRequestDto {
+public class GroupRequestDto {
   private Long id;
   private String name;
   private String curriculum;

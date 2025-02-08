@@ -1,9 +1,9 @@
-package com.example.cau.bluedragon.member.domain;
+package com.example.cau.bluedragon.user.domain;
 
-import com.example.cau.bluedragon.group.domain.GroupMember;
+import com.example.cau.bluedragon.group.domain.GroupUser;
 import com.example.cau.bluedragon.group.domain.JoinRequest;
 import com.example.cau.bluedragon.review.domain.Review;
-import com.example.cau.bluedragon.member.domain.enums.Sex;
+import com.example.cau.bluedragon.user.domain.enums.Sex;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +24,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Member {
+@Table(name = "member")
+public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -45,12 +47,12 @@ public class Member {
 
   private Boolean isDeleted;
 
-  @OneToMany(mappedBy = "member")
-  List<GroupMember> groupMembers;
+  @OneToMany(mappedBy = "user")
+  List<GroupUser> groupUsers;
 
-  @OneToMany(mappedBy = "member")
+  @OneToMany(mappedBy = "user")
   List<JoinRequest> joinRequests;
 
-  @OneToMany(mappedBy = "member")
+  @OneToMany(mappedBy = "user")
   List<Review> review;
 }

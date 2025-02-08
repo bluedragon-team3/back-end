@@ -1,12 +1,21 @@
 package com.example.cau.bluedragon.review.web.dto;
 
+import com.example.cau.bluedragon.group.web.dto.GroupResponseDto;
+import com.example.cau.bluedragon.user.web.dto.UserResponsesDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ReviewResponseDto {
   Long id;
-  Long memberId;
-  Long groupId;
+  UserResponsesDto user;
   String content;
 
   @JsonFormat(pattern = "yyyy-MM-ddTHH:mm")
