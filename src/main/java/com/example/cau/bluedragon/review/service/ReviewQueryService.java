@@ -1,11 +1,11 @@
 package com.example.cau.bluedragon.review.service;
 
-import com.example.cau.bluedragon.group.web.dto.GroupResponseDto;
-import com.example.cau.bluedragon.review.web.dto.ReviewResponseDto;
+import com.example.cau.bluedragon.group.domain.Group;
+import com.example.cau.bluedragon.review.domain.Review;
 import java.util.List;
 
 public interface ReviewQueryService {
-  List<GroupResponseDto> getEndedGroups();
+  List<Group> getEndedGroups();
 
-  List<ReviewResponseDto> getReviews(Long groupId);
+  List<Review> getReviews(Long groupId);
 }

@@ -1,6 +1,5 @@
 package com.example.cau.bluedragon.review.web.dto;
 
-import com.example.cau.bluedragon.group.web.dto.GroupResponseDto;
 import com.example.cau.bluedragon.user.web.dto.UserResponsesDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
