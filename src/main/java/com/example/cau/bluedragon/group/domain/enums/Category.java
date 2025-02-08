@@ -1,0 +1,16 @@
+package com.example.cau.bluedragon.group.domain.enums;
+
+public enum Category {
+  SPORT,
+  HOBBY,
+  ENJOY,
+  VOLUNTEER,
+  STUDY_HUMANITIES,
+  STUDY_EDUCATION,
+  STUDY_SOCIAL_SCIENCE,
+  STUDY_NATURAL_SCIENCE,
+  STUDY_ENGINEERING,
+  STUDY_SOFTWARE,
+  STUDY_BUSINESS_ECONOMICS,
+  STUDY_MEDICAL_NURSING
+}
