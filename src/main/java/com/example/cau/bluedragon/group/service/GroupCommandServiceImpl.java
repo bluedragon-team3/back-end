@@ -55,7 +55,7 @@ public class GroupCommandServiceImpl implements GroupCommandService {
 
     @Override
     @Transactional
-    public Group endGroup(Long groupId, Long userId) {
+    public void endGroup(Long groupId, Long userId) {
         Group group = groupRepository.findById(groupId)
             .orElseThrow(() -> new RuntimeException("해당 ID를 가진 회원이 존재하지 않습니다."));
 
@@ -74,13 +74,11 @@ public class GroupCommandServiceImpl implements GroupCommandService {
 
         // 내가 소모임장이고, 아직 종료되지 않은 소모임인 경우
         group.endGroup(); // 소모임 종료
-
-        return group;
     }
 
     @Override
     @Transactional
-    public void joinGroup(Long groupId) {
+    public void joinGroup(Long groupId, Long userId) {
 
     }
 }
