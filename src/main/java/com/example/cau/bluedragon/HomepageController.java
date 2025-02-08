@@ -27,6 +27,7 @@ public class HomepageController {
   private List<GroupResponseDto> getRandomGroups() {
     List<Group> groups = groupRepository.findAll();
     Collections.shuffle(groups);
-    return GroupConverter.groupListToResponseDtoList(groups);
+    List<Group> subGroups = groups.subList(0, Math.min(groups.size(), 4));
+    return GroupConverter.groupListToResponseDtoList(subGroups);
   }
 }
