@@ -3,6 +3,7 @@ package com.example.cau.bluedragon.group.domain;
 import com.example.cau.bluedragon.group.domain.enums.Category;
 import com.example.cau.bluedragon.review.domain.Review;
 import com.example.cau.bluedragon.user.domain.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -47,13 +49,15 @@ public class Group {
   private Long peopleLimit;
 
   @CreatedDate
-  private LocalDateTime createdAt;
+  private LocalDateTime createdDate;
 
-  private LocalDateTime startDate;
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  private LocalDate startDate;
 
-  private LocalDateTime finishDate;
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  private LocalDate finishDate;
 
-  private Boolean idEnded;
+  private Boolean isEnded;
 
   private Boolean isDeleted;
 
@@ -68,4 +72,9 @@ public class Group {
 
   @OneToMany(mappedBy = "group")
   List<Review> review;
+
+  public void endGroup() {
+    this.isEnded = true;
+  }
+
 }

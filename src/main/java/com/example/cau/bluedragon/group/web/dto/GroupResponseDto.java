@@ -4,6 +4,7 @@ import com.example.cau.bluedragon.group.domain.enums.Category;
 import com.example.cau.bluedragon.user.domain.User;
 import com.example.cau.bluedragon.user.web.dto.UserResponsesDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,14 +23,16 @@ public class GroupResponseDto {
   private String detail;
   private String category;
 
-  @JsonFormat(pattern = "yyyy-MM-ddTHH:mm")
-  private LocalDateTime startDate;
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  private LocalDate startDate;
 
-  @JsonFormat(pattern = "yyyy-MM-ddTHH:mm")
-  private LocalDateTime finishDate;
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  private LocalDate finishDate;
 
   private Long peopleLimit;
 
-  @JsonFormat(pattern = "yyyy-MM-ddTHH:mm")
-  private LocalDateTime createdAt;
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+  private LocalDateTime createdDate;
+
+  private Boolean isEnded;
 }
